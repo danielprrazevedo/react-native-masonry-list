@@ -1,22 +1,27 @@
+## 1.5.0
+
+- Changing to `Animated.ScrollView` component and exposing the reference via `forwardRef`
+
 ## 1.2.1
-* Fix `keyExtractor` types.
+
+- Fix `keyExtractor` types.
 
 ## 1.2.0
 
 ## What's Changed
-* Remove `keyPrefix` and replace with `keyExtractor` like [FlatList].
+
+- Remove `keyPrefix` and replace with `keyExtractor` like [FlatList].
 
 ## 1.1.5
 
 ## What's Changed
-* Add optional `removeClippedSubviews` by @hyochan in https://github.com/hyochan/react-native-masonry-list/pull/30
-* Support `onScroll` by @hyochan in https://github.com/hyochan/react-native-masonry-list/pull/31
 
+- Add optional `removeClippedSubviews` by @hyochan in https://github.com/hyochan/react-native-masonry-list/pull/30
+- Support `onScroll` by @hyochan in https://github.com/hyochan/react-native-masonry-list/pull/31
 
 ## 1.1.4
 
 Small internal lint fixes.
-
 
 ## 1.1.3
 

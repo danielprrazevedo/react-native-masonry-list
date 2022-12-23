@@ -4,9 +4,9 @@
 
 ## NOTE
 
-This is a fork of [@react-native-seoul/masonry-list](https://github.com/hyochan/react-native-masonry-list) where we use Animated.ScrollView and forwardRef to keep the component reference like the scroll view.
+This is a fork of [@react-native-seoul/masonry-list](https://github.com/hyochan/react-native-masonry-list) where we use `Animated.ScrollView` and `forwardRef` to keep the component reference like the scroll view.
 
-My inspiration for updating this package to this was the need to use this in conjunction with [react-native-collapsible-tab-view v2](https://github.com/PedroBern/react-native-collapsible-tab-view/tree/v2) and as it uses references to the Animated.ScrollView we are required to implement these animations.
+My inspiration for updating this package to this was the need to use this in conjunction with [react-native-collapsible-tab-view v2](https://github.com/PedroBern/react-native-collapsible-tab-view/tree/v2) and as it uses references to the `Animated.ScrollView` we are required to implement these animations.
 
 This should help with this [request #53](https://github.com/hyochan/react-native-masonry-list/issues/53)
 
