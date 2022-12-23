@@ -1,4 +1,4 @@
-import type {MutableRefObject, ReactElement} from 'react';
+import type {ReactElement} from 'react';
 import React, {memo, useState, forwardRef} from 'react';
 import type {
   NativeScrollEvent,
