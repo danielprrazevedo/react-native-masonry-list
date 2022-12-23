@@ -1,4 +1,4 @@
-# @diparrel-react-native/animated-scrollview-masonry-list
+# @danielprr-react-native/animated-scrollview-masonry-list
 
 > Pinterest like listview made in [React Native](https://reactnative.dev). It just behaves like the [FlatList](https://reactnative.dev/docs/next/flatlist) so it is easy to use.
 
@@ -29,11 +29,11 @@ If you want [react-native-reanimated](https://github.com/software-mansion/react-
 ## Installation
 
 ```
-npm install @diparrel-react-native/animated-scrollview-masonry-list
+npm install @danielprr-react-native/animated-scrollview-masonry-list
 ```
 
 ```tsx
-import MasonryList from '@diparrel-react-native/animated-scrollview-masonry-list';
+import MasonryList from '@danielprr-react-native/animated-scrollview-masonry-list';
 ```
 
 ## Preview

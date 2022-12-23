@@ -1,5 +1,5 @@
 {
-  "name": "@diparrel-react-native/animated-scrollview-masonry-list",
+  "name": "@danielprr-react-native/animated-scrollview-masonry-list",
   "version": "1.5.0",
   "description": "React Native Masonry List for Pinterest like UI implemented just like the [FlatList].",
   "main": "lib/index.js",
