@@ -1,18 +1,17 @@
+import type {MutableRefObject, ReactElement} from 'react';
+import React, {memo, useState, forwardRef} from 'react';
 import type {
   NativeScrollEvent,
   Omit,
   RefreshControlProps,
+  ScrollView,
   ScrollViewProps,
   StyleProp,
   ViewStyle,
 } from 'react-native';
-import {Animated} from 'react-native';
-import type {ScrollView} from 'react-native';
-import {RefreshControl, View} from 'react-native';
-import type {MutableRefObject, ReactElement} from 'react';
-import React, {memo, useState} from 'react';
+import {Animated, RefreshControl, View} from 'react-native';
 
-interface Props<T> extends Omit<ScrollViewProps, 'refreshControl'> {
+interface Props<T = unknown> extends Omit<ScrollViewProps, 'refreshControl'> {
   innerRef?: MutableRefObject<ScrollView | undefined>;
   loading?: boolean;
   refreshing?: RefreshControlProps['refreshing'];
@@ -47,13 +46,12 @@ const isCloseToBottom = (
   );
 };
 
-function MasonryList<T>(props: Props<T>): ReactElement {
+const MasonryList = forwardRef<ScrollView, Props>((props, ref) => {
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
 
   const {
     refreshing,
     data,
-    innerRef,
     ListHeaderComponent,
     ListEmptyComponent,
     ListFooterComponent,
@@ -68,7 +66,7 @@ function MasonryList<T>(props: Props<T>): ReactElement {
     LoadingView,
     numColumns = 2,
     horizontal,
-    onScroll = () => {},
+    onScroll = Animated.event([], {useNativeDriver: false}),
     removeClippedSubviews = false,
     keyExtractor,
     keyboardShouldPersistTaps = 'handled',
@@ -81,7 +79,7 @@ function MasonryList<T>(props: Props<T>): ReactElement {
   return (
     <Animated.ScrollView
       {...propsWithoutStyle}
-      ref={innerRef}
+      ref={ref}
       style={[{flex: 1, alignSelf: 'stretch'}, containerStyle]}
       contentContainerStyle={contentContainerStyle}
       keyboardShouldPersistTaps={keyboardShouldPersistTaps}
@@ -100,12 +98,12 @@ function MasonryList<T>(props: Props<T>): ReactElement {
         ) : null
       }
       scrollEventThrottle={16}
-      onScroll={Animated.forkEvent((e) => {
+      onScroll={Animated.forkEvent(onScroll, (e) => {
         const nativeEvent: NativeScrollEvent = e.nativeEvent;
         if (isCloseToBottom(nativeEvent, onEndReachedThreshold || 0.0)) {
           onEndReached?.();
         }
-      }, onScroll)}
+      })}
     >
       <>
         <View style={ListHeaderComponentStyle}>{ListHeaderComponent}</View>
@@ -161,6 +159,6 @@ function MasonryList<T>(props: Props<T>): ReactElement {
       </>
     </Animated.ScrollView>
   );
-}
+});
 
 export default memo(MasonryList);
