@@ -14,14 +14,8 @@
     "allowSyntheticDefaultImports": true,
     "declaration": true
   },
-  "include": [
-    "index.tsx"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.test.tsx",
-    "**/*.spec.ts"
-  ],
+  "include": ["index.tsx", "types.d.ts"],
+  "exclude": ["node_modules", "**/*.test.tsx", "**/*.spec.ts"],
   "jest": {
     "globals": {
       "ts-jest": {
