@@ -6,7 +6,9 @@ import type {
   StyleProp,
   ViewStyle,
 } from 'react-native';
-import {RefreshControl, ScrollView, View} from 'react-native';
+import {Animated} from 'react-native';
+import type {ScrollView} from 'react-native';
+import {RefreshControl, View} from 'react-native';
 import type {MutableRefObject, ReactElement} from 'react';
 import React, {memo, useState} from 'react';
 
@@ -66,7 +68,7 @@ function MasonryList<T>(props: Props<T>): ReactElement {
     LoadingView,
     numColumns = 2,
     horizontal,
-    onScroll,
+    onScroll = () => {},
     removeClippedSubviews = false,
     keyExtractor,
     keyboardShouldPersistTaps = 'handled',
@@ -77,7 +79,7 @@ function MasonryList<T>(props: Props<T>): ReactElement {
   const {style, ...propsWithoutStyle} = props;
 
   return (
-    <ScrollView
+    <Animated.ScrollView
       {...propsWithoutStyle}
       ref={innerRef}
       style={[{flex: 1, alignSelf: 'stretch'}, containerStyle]}
@@ -98,14 +100,12 @@ function MasonryList<T>(props: Props<T>): ReactElement {
         ) : null
       }
       scrollEventThrottle={16}
-      onScroll={(e) => {
+      onScroll={Animated.forkEvent((e) => {
         const nativeEvent: NativeScrollEvent = e.nativeEvent;
         if (isCloseToBottom(nativeEvent, onEndReachedThreshold || 0.0)) {
           onEndReached?.();
         }
-
-        onScroll?.(e);
-      }}
+      }, onScroll)}
     >
       <>
         <View style={ListHeaderComponentStyle}>{ListHeaderComponent}</View>
@@ -159,7 +159,7 @@ function MasonryList<T>(props: Props<T>): ReactElement {
         {loading && LoadingView}
         {ListFooterComponent}
       </>
-    </ScrollView>
+    </Animated.ScrollView>
   );
 }
 
