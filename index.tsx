@@ -12,7 +12,6 @@ import type {
 import {Animated, RefreshControl, View} from 'react-native';
 
 interface Props<T = unknown> extends Omit<ScrollViewProps, 'refreshControl'> {
-  innerRef?: MutableRefObject<ScrollView | undefined>;
   loading?: boolean;
   refreshing?: RefreshControlProps['refreshing'];
   onRefresh?: RefreshControlProps['onRefresh'];
