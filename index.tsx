@@ -1,4 +1,4 @@
-import type {ReactElement} from 'react';
+import type {ForwardedRef, ReactElement} from 'react';
 import React, {memo, useState, forwardRef} from 'react';
 import type {
   NativeScrollEvent,
@@ -11,7 +11,7 @@ import type {
 } from 'react-native';
 import {Animated, RefreshControl, View} from 'react-native';
 
-interface Props<T = unknown> extends Omit<ScrollViewProps, 'refreshControl'> {
+interface Props<T> extends Omit<ScrollViewProps, 'refreshControl'> {
   loading?: boolean;
   refreshing?: RefreshControlProps['refreshing'];
   onRefresh?: RefreshControlProps['onRefresh'];
@@ -45,7 +45,10 @@ const isCloseToBottom = (
   );
 };
 
-const MasonryList = forwardRef<ScrollView, Props>((props, ref) => {
+function MasonryListInner<T>(
+  props: Props<T>,
+  ref: ForwardedRef<ScrollView>,
+): JSX.Element {
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
 
   const {
@@ -158,6 +161,12 @@ const MasonryList = forwardRef<ScrollView, Props>((props, ref) => {
       </>
     </Animated.ScrollView>
   );
-});
+}
+
+type MasonryListType = <T>(
+  props: Props<T> & {ref?: ForwardedRef<ScrollView>},
+) => ReturnType<typeof MasonryListInner>;
+
+const MasonryList: MasonryListType = forwardRef(MasonryListInner);
 
 export default memo(MasonryList);
