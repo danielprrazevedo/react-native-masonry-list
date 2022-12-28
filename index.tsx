@@ -22,7 +22,7 @@ interface Props<T> extends Omit<ScrollViewProps, 'refreshControl'> {
   data: T[];
   renderItem: ({item, i}: {item: T; i: number}) => ReactElement;
   LoadingView?: React.ComponentType<any> | React.ReactElement | null;
-  ListHeaderComponent?: React.ReactNode | null;
+  ListHeaderComponent?: React.ComponentType<any> | React.ReactElement | null;
   ListEmptyComponent?: React.ComponentType<any> | React.ReactElement | null;
   ListFooterComponent?: React.ComponentType<any> | React.ReactElement | null;
   ListHeaderComponentStyle?: StyleProp<ViewStyle>;
@@ -108,7 +108,13 @@ function MasonryListInner<T>(
       })}
     >
       <>
-        <View style={ListHeaderComponentStyle}>{ListHeaderComponent}</View>
+        <View style={ListHeaderComponentStyle}>
+          {React.isValidElement(ListHeaderComponent) ? (
+            ListHeaderComponent
+          ) : (
+            <ListHeaderComponent />
+          )}
+        </View>
         {data.length === 0 && ListEmptyComponent ? (
           React.isValidElement(ListEmptyComponent) ? (
             ListEmptyComponent
