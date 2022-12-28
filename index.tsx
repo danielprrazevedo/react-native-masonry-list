@@ -109,12 +109,13 @@ function MasonryListInner<T>(
     >
       <>
         <View style={ListHeaderComponentStyle}>
-          {!!ListEmptyComponent &&
-            (React.isValidElement(ListHeaderComponent) ? (
+          {ListHeaderComponent ? (
+            React.isValidElement(ListHeaderComponent) ? (
               ListHeaderComponent
             ) : (
               <ListHeaderComponent />
-            ))}
+            )
+          ) : null}
         </View>
         {data.length === 0 && ListEmptyComponent ? (
           React.isValidElement(ListEmptyComponent) ? (
